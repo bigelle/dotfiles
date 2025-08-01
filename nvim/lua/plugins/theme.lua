@@ -1,12 +1,15 @@
 return {
     {
-        "vague2k/vague.nvim",
+        "rose-pine/neovim",
+        name = "rose-pine",
         config = function()
-            require("vague").setup({
+            require("rose-pine").setup({
+                styles = {
+                    transparency = true
+                }
             })
-            vim.cmd.colorscheme("vague")
-        end,
-        priority = 1000,
+            vim.cmd("colorscheme rose-pine")
+        end
     },
     {
         "folke/noice.nvim",
@@ -33,8 +36,11 @@ return {
                     command_palette = true,       -- position the cmdline and popupmenu together
                     long_message_to_split = true, -- long messages will be sent to a split
                     inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = true,       -- add a border to hover docs and signature help
+                    lsp_doc_border = true,        -- add a border to hover docs and signature help
                 },
+            })
+            require("notify").setup({
+                background_colour = "#000000",
             })
         end,
     },
@@ -50,5 +56,16 @@ return {
                 }
             )
         end
-    }
+    },
+    {
+        'goolord/alpha-nvim',
+        dependencies = {
+            'echasnovski/mini.icons',
+            'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.theta'.config)
+        end
+    },
+
 }

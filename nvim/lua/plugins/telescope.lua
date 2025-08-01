@@ -12,7 +12,20 @@ return {
             pickers = {
                 find_files = {
                     no_ignore = true,
-                }
+                },
+
+                live_grep = {
+                    mappings = {
+                        i = {
+                            ["<CR>"] = function(prompt_bufnr)
+                                require("telescope.actions").select_default(prompt_bufnr)
+                                vim.schedule(function()
+                                    vim.cmd("normal! zz")
+                                end)
+                            end,
+                        },
+                    },
+                },
             }
         })
     end

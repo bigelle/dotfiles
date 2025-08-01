@@ -66,18 +66,6 @@ return {
         { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     },
     {
-        "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
-        keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-        },
-    },
-    {
         "mikavilpas/yazi.nvim",
         event = "VeryLazy",
         keys = {
@@ -117,4 +105,27 @@ return {
             require("yazi").setup({})
         end
     },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+            -- Optional image support for file preview: See `# Preview Mode` for more information.
+            -- {"3rd/image.nvim", opts = {}},
+            -- OR use snacks.nvim's image module:
+            -- "folke/snacks.nvim",
+        },
+        lazy = false, -- neo-tree will lazily load itself
+        ---@module "neo-tree"
+        ---@type neotree.Config?
+        opts = {
+            filesystem = {
+                filtered_items = {
+                    hide_gitignored = false,
+                }
+            }
+        }
+    }
 }

@@ -13,18 +13,12 @@ if [ ! -d "$PROJECT_PATH" ]; then
     exit 1
 fi
 
-SESSION_NAME="dev-session"
-
-if tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-    echo "Сессия '$SESSION_NAME' уже существует. Подключаемся к ней..."
-    tmux attach-session -t "$SESSION_NAME"
-    exit 0
-fi
+SESSION_NAME=$(basename "$1")
 
 tmux new-session -d -s "$SESSION_NAME" -c "$PROJECT_PATH"
 
 tmux new-window -t "$SESSION_NAME:1" -n "nvim" -c "$PROJECT_PATH"
-tmux send-keys -t "$SESSION_NAME:1" "cd '$PROJECT_PATH' && nvim ." Enter
+tmux send-keys -t "$SESSION_NAME:1" "cd '$PROJECT_PATH' && nvim" Enter
 
 tmux new-window -t "$SESSION_NAME:2" -n "home" -c "$HOME"
 
