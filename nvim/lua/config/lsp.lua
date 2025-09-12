@@ -1,18 +1,13 @@
-vim.lsp.enable({
-    "gopls",
-    "luals",
-    "rust_analyzer",
-})
-
 vim.diagnostic.config({
-    --virtual_lines = true,
-    virtual_text = true,
+    virtual_text = false,
+    virtual_lines = false,
     underline = true,
     update_in_insert = false,
     severity_sort = true,
     float = {
         border = "rounded",
-        source = true,
+        source = false,
+        wrap = true,
     },
     signs = {
         text = {
@@ -26,4 +21,54 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.WARN] = "WarningMsg",
         },
     },
+})
+
+vim.lsp.config('gopls', {
+    settings = {
+        gopls = {
+            gofumpt = true,
+            codelenses = {
+                generate = true,
+                regenerate_cgo = true,
+                run_govulncheck = true,
+                test = true,
+                tidy = true,
+                upgrade_dependency = true,
+                vendor = true,
+            },
+            hints = {
+                assignVariableTypes = false,
+                compositeLiteralFields = false,
+                compositeLiteralTypes = false,
+                constantValues = false,
+                functionTypeParameters = false,
+                parameterNames = false,
+                rangeVariableTypes = false,
+            },
+            analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedwrite = true,
+                unreachable = true,
+                shadow = true,
+                copylocks = true,
+                loopclosure = true,
+                lostcancel = true,
+                httpresponse = true,
+                printf = true,
+                errorsas = true,
+                composites = true,
+                simplifyrange = true,
+                simplifyslice = true,
+                structtag = true,
+                waitgroup = true,
+                unmarshal = true,
+                unsafeptr = true,
+                unusedresult = true,
+                unusedvariable = true,
+                deprecated = true,
+            },
+            completeUnimported = true,
+        },
+    }
 })

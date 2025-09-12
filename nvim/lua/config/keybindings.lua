@@ -67,5 +67,3 @@ end
 
 setup_keymaps()
 vim.api.nvim_create_user_command("GoModifyTags", go_modify_tags, {})
-
-return M
