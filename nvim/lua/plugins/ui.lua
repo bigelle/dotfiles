@@ -1,5 +1,5 @@
 return {
-    {
+        {
         "rose-pine/neovim",
         name = "rose-pine",
         config = function()
@@ -67,5 +67,26 @@ return {
             require 'alpha'.setup(require 'alpha.themes.theta'.config)
         end
     },
+     {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        opts = {
+            triggers = {},
 
+            plugins = {
+                spelling = {
+                    enabled = false,
+                },
+            },
+        },
+        keys = {
+            {
+                "<leader>?",
+                function()
+                    require("which-key").show({ mode = 'n' })
+                end,
+                desc = "Show Which-Key manually",
+            },
+        },
+    },
 }

@@ -1,27 +1,5 @@
 return {
     {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            triggers = {},
-
-            plugins = {
-                spelling = {
-                    enabled = false,
-                },
-            },
-        },
-        keys = {
-            {
-                "<leader>?",
-                function()
-                    require("which-key").show({ mode = 'n' })
-                end,
-                desc = "Show Which-Key manually",
-            },
-        },
-    },
-    {
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
         branch = "master",
@@ -52,10 +30,6 @@ return {
         lazy = true,
         cmd = {
             "LazyGit",
-            "LazyGitConfig",
-            "LazyGitCurrentFile",
-            "LazyGitFilter",
-            "LazyGitFilterCurrentFile",
         },
         -- optional for floating window border decoration
         dependencies = {
@@ -66,27 +40,6 @@ return {
         keys = {
             { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         },
-    },
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",     -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-            -- Optional image support for file preview: See `# Preview Mode` for more information.
-            -- {"3rd/image.nvim", opts = {}},
-            -- OR use snacks.nvim's image module:
-            -- "folke/snacks.nvim",
-        },
-        lazy = false,     -- neo-tree will lazily load itself
-        opts = {
-            filesystem = {
-                filtered_items = {
-                    hide_gitignored = false,
-                }
-            }
-        }
     },
     {
         "rachartier/tiny-inline-diagnostic.nvim",
