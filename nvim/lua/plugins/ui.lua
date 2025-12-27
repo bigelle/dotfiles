@@ -1,15 +1,13 @@
 return {
-        {
-        "rose-pine/neovim",
-        name = "rose-pine",
+    {
+        "rebelot/kanagawa.nvim",
         config = function()
-            require("rose-pine").setup({
-                styles = {
-                    transparency = true
-                }
+            require("kanagawa").setup({
+                theme = "wave",
             })
-            vim.cmd("colorscheme rose-pine")
-        end
+
+            vim.cmd("colorscheme kanagawa")
+        end,
     },
     {
         "folke/noice.nvim",
@@ -67,7 +65,7 @@ return {
             require 'alpha'.setup(require 'alpha.themes.theta'.config)
         end
     },
-     {
+    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = {
@@ -89,4 +87,19 @@ return {
             },
         },
     },
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        opts = {
+            size = function(term)
+                if term.direction == "horizontal" then
+                    return 15
+                elseif term.direction == "vertical" then
+                    return vim.o.columns * 0.4
+                end
+            end,
+            open_mapping = [[<c-\>]],
+            direction = 'vertical',
+        }
+    }
 }

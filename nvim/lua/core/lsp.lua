@@ -60,3 +60,18 @@ vim.lsp.config('gopls', {
     }
 })
 
+vim.lsp.config('rust_analyzer', {
+  cmd = { 'rust-analyzer' },
+  filetypes = { 'rust' },
+  root_dir = function(fname)
+    return require('lspconfig.util').root_pattern('Cargo.toml')(fname)
+  end,
+  settings = {
+    ['rust-analyzer'] = {
+      checkOnSave = {
+        command = "clippy",
+      },
+    },
+  },
+})
+

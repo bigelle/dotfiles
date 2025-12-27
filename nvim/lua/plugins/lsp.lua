@@ -31,7 +31,8 @@ return {
 		config = function()
 			vim.lsp.enable({
 				"gopls",
-				"lua_ls"
+				"lua_ls",
+                "rust_analyzer"
 			})
 		end
 	},
