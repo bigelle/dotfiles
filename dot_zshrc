@@ -105,5 +105,3 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=/home/heroofsocks/.local/bin:$PATH
 eval "$(mise activate zsh)"
-eval "$(direnv hook zsh)"
-eval "$(~/.local/bin/mise activate zsh)"
