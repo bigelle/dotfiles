@@ -1,0 +1,5 @@
+background-opacity=0.8
+theme="Carbonfox"
+font-family="FiraCode Nerd Font Mono"
+cursor-style=bar
+shell-integration-features = no-cursor
