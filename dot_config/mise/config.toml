@@ -1,0 +1,7 @@
+[tools]
+go = "latest"
+node = "lts"
+"go:golang.org/x/tools/gopls" = "latest"
+"ubi:BurntSushi/ripgrep" = "latest"
+"ubi:sharkdp/fd" = "latest"
+"ubi:LuaLS/lua-language-server" = "latest"
