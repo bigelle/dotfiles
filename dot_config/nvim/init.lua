@@ -17,48 +17,43 @@
 -- OPTIONS
 -- =============================================================================
 
-vim.g.mapleader = " "
+vim.g.mapleader      = " "
 vim.g.maplocalleader = " "
 
-local opt = vim.opt
+local opt            = vim.opt
 
-opt.number         = true       -- номера строк
-opt.relativenumber = true       -- относительные номера
-opt.signcolumn     = "yes"      -- всегда показывать колонку знаков (без прыжков)
-opt.cursorline     = true       -- подсветка текущей строки
+opt.number           = true -- номера строк
+opt.relativenumber   = true -- относительные номера
+opt.signcolumn       = "yes" -- всегда показывать колонку знаков (без прыжков)
+opt.cursorline       = true -- подсветка текущей строки
 
-opt.tabstop        = 2          -- ширина таба
-opt.shiftwidth     = 2          -- отступ при >> и <<
-opt.expandtab      = true       -- таб → пробелы
-opt.smartindent    = true
+opt.tabstop          = 2   -- ширина таба
+opt.shiftwidth       = 2   -- отступ при >> и <<
+opt.expandtab        = true -- таб → пробелы
+opt.smartindent      = true
 
-opt.ignorecase     = true       -- регистронезависимый поиск...
-opt.smartcase      = true       -- ...если нет заглавных
+opt.ignorecase       = true -- регистронезависимый поиск...
+opt.smartcase        = true -- ...если нет заглавных
 
-opt.wrap           = false      -- не переносить длинные строки
-opt.scrolloff      = 8          -- запас строк при скролле
-opt.sidescrolloff  = 8
+opt.wrap             = false -- не переносить длинные строки
+opt.scrolloff        = 8   -- запас строк при скролле
+opt.sidescrolloff    = 8
 
-opt.splitright     = true       -- вертикальный сплит вправо
-opt.splitbelow     = true       -- горизонтальный сплит вниз
+opt.splitright       = true    -- вертикальный сплит вправо
+opt.splitbelow       = true    -- горизонтальный сплит вниз
 
-opt.undofile       = true       -- персистентный undo между сессиями
-opt.swapfile       = false      -- без swap-файлов
+opt.undofile         = true    -- персистентный undo между сессиями
+opt.swapfile         = false   -- без swap-файлов
 
-opt.termguicolors  = true       -- 24-bit цвета
-opt.winborder      = "rounded"  -- скруглённые рамки у float-окон (LSP hover и т.д.)
+opt.termguicolors    = true    -- 24-bit цвета
+opt.winborder        = "rounded" -- скруглённые рамки у float-окон (LSP hover и т.д.)
 
-opt.completeopt    = "menu,menuone,noselect,popup"
-opt.shortmess:append("c")       -- меньше мусора от completion-меню
-opt.complete       = ""         -- только LSP, без буфера/путей/тегов
+opt.completeopt      = "menu,menuone,noselect,popup"
+opt.shortmess:append("c") -- меньше мусора от completion-меню
+opt.complete   = "o"      -- только LSP, без буфера/путей/тегов
 
-opt.updatetime     = 250        -- быстрее CursorHold (нужно для LSP highlights)
-opt.timeoutlen     = 300        -- быстрее which-key
-
--- показывать некоторые невидимые символы
-opt.list           = true
-opt.listchars      = { tab = "» ", trail = "·", nbsp = "␣" }
-
+opt.updatetime = 250      -- быстрее CursorHold (нужно для LSP highlights)
+opt.timeoutlen = 300      -- быстрее which-key
 
 -- =============================================================================
 -- PLUGINS (vim.pack — встроенный менеджер 0.12)
@@ -66,7 +61,7 @@ opt.listchars      = { tab = "» ", trail = "·", nbsp = "␣" }
 -- Обновить плагины: vim.pack.update({}) → :w для подтверждения
 -- =============================================================================
 
-local gh = function(x) return "https://github.com/" .. x end
+local gh       = function(x) return "https://github.com/" .. x end
 
 vim.pack.add({
   -- каталог LSP-конфигов (cmd, filetypes, root_markers) под сотни серверов
@@ -83,10 +78,10 @@ vim.pack.add({
 
   -- fuzzy finder: файлы, grep, буферы, LSP-символы
   gh("nvim-telescope/telescope.nvim"),
-  gh("nvim-lua/plenary.nvim"),              -- зависимость telescope
+  gh("nvim-lua/plenary.nvim"), -- зависимость telescope
 
   -- навигация по файлам — v2 API (ветка harpoon2)
-  { src = gh("ThePrimeagen/harpoon"), version = "harpoon2" },
+  { src = gh("ThePrimeagen/harpoon"),            version = "harpoon2" },
 
   -- подсветка TODO/FIXME/NOTE/HACK в комментариях
   gh("folke/todo-comments.nvim"),
@@ -103,7 +98,7 @@ vim.pack.add({
 
 
 -- встроенные opt-плагины 0.12 (не грузятся автоматически)
-vim.cmd("packadd nvim.undotree")   -- :Undotree
+vim.cmd("packadd nvim.undotree") -- :Undotree
 -- vim.cmd("packadd nvim.difftool")   -- :DiffTool (раскомментировать если нужен)
 -- vim.cmd("packadd nvim.tohtml")     -- :TOhtml   (раскомментировать если нужен)
 
@@ -139,9 +134,6 @@ require("telescope").setup({
     layout_config = { prompt_position = "top" },
   },
 })
-
--- todo-comments
-require("todo-comments").setup()
 
 -- which-key
 require("which-key").setup()
@@ -187,8 +179,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP hover" })
     vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = args.buf, desc = "LSP format" })
     vim.api.nvim_create_autocmd("BufWritePre", {
-	    buffer = args.buf,
-	    callback = function() vim.lsp.buf.format({ async = false }) end,
+      buffer = args.buf,
+      callback = function() vim.lsp.buf.format({ async = false }) end,
     })
 
     -- inlay hints (типы, имена параметров) — включить если нужно
@@ -209,14 +201,14 @@ vim.o.autocomplete = true
 local sev = vim.diagnostic.severity
 
 vim.diagnostic.config({
-  severity_sort  = true,
-  update_in_insert = false,    -- не показывать ошибки в insert mode
-  virtual_lines  = false,      -- ошибки строкой под кодом (поставь true если нравится)
-  virtual_text   = {
+  severity_sort    = true,
+  update_in_insert = false, -- не показывать ошибки в insert mode
+  virtual_lines    = false, -- ошибки строкой под кодом (поставь true если нравится)
+  virtual_text     = {
     prefix = "●",
     spacing = 4,
   },
-  signs = {
+  signs            = {
     text = {
       [sev.ERROR] = "E",
       [sev.WARN]  = "W",
@@ -224,9 +216,9 @@ vim.diagnostic.config({
       [sev.HINT]  = "H",
     },
   },
-  float = {
+  float            = {
     border = "rounded",
-    source = true,             -- показывать имя LSP-сервера в float
+    source = true, -- показывать имя LSP-сервера в float
   },
 })
 
@@ -249,17 +241,17 @@ vim.diagnostic.config({
 local map = vim.keymap.set
 
 -- ФАЙЛЫ
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>",  { desc = "Find file" })
-map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",   { desc = "Live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<cr>",     { desc = "Find buffer" })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>",    { desc = "Recent files" })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find file" })
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffer" })
+map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
 
 -- LSP (дополнение к встроенным)
-map("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>",      { desc = "LSP definition" })
+map("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>", { desc = "LSP definition" })
 map("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", { desc = "LSP symbols" })
-map("n", "<leader>lw", "<cmd>Telescope lsp_workspace_symbols<cr>",{ desc = "LSP workspace symbols" })
-map("n", "<leader>li", "<cmd>LspInfo<cr>",                        { desc = "LSP info" })
-map("n", "<leader>lr", "<cmd>lsp restart<cr>",                    { desc = "LSP restart" })
+map("n", "<leader>lw", "<cmd>Telescope lsp_workspace_symbols<cr>", { desc = "LSP workspace symbols" })
+map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP info" })
+map("n", "<leader>lr", "<cmd>lsp restart<cr>", { desc = "LSP restart" })
 
 -- ДИАГНОСТИКА
 map("n", "<leader>dd", vim.diagnostic.open_float, { desc = "Diagnostic float" })
@@ -268,12 +260,12 @@ map("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostic li
 -- HARPOON
 local harpoon = require("harpoon")
 harpoon:setup()
-map("n", "<leader>ha", function() harpoon:list():add() end,    { desc = "Harpoon add" })
+map("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add" })
 map("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Harpoon menu" })
-map("n", "<leader>1",  function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
-map("n", "<leader>2",  function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
-map("n", "<leader>3",  function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
-map("n", "<leader>4",  function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
+map("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
+map("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
+map("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
+map("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
 
 -- COMPLETION (Tab/S-Tab для навигации по вариантам)
 map("i", "<Tab>", function()
@@ -290,9 +282,9 @@ map("i", "<CR>", function()
 end, { expr = true, desc = "Confirm completion / Enter" })
 
 -- MISC
-map("n", "<leader>u",  "<cmd>Undotree<cr>",           { desc = "Undo tree" })
-map("n", "<leader>td", "<cmd>TodoTelescope<cr>",       { desc = "TODOs" })
-map("n", "<Esc>",      "<cmd>nohlsearch<cr>",          { desc = "Clear search" })
+map("n", "<leader>u", "<cmd>Undotree<cr>", { desc = "Undo tree" })
+map("n", "<leader>td", "<cmd>TodoTelescope<cr>", { desc = "TODOs" })
+map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search" })
 
 -- навигация между сплитами через Ctrl+hjkl
 map("n", "<C-h>", "<C-w>h")
