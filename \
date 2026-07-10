@@ -12,6 +12,7 @@
 --   2. Написать setup() после блока vim.pack.add
 -- =============================================================================
 
+
 -- =============================================================================
 -- OPTIONS
 -- =============================================================================
@@ -167,21 +168,16 @@ require("mini.surround").setup()
 --   A) mason-lspconfig с automatic_enable = true — автоматически для установленных
 --   B) vim.lsp.enable({...}) — явно, для серверов установленных вручную вне Mason
 --
--- Настройки под конкретный сервер:
+-- Настройки под конкретный сервер → создай файл lsp/<servername>.lua
 -- Пример: ~/.config/nvim/lsp/lua_ls.lua
--- vim.lsp.config("lua_ls", {
+--   return {
 --     settings = {
---         Lua = { diagnostics = { globals = { "vim" } } }
+--       Lua = { diagnostics = { globals = { "vim" } } }
 --     }
--- })
+--   }
 --
 -- Проверить статус LSP: :checkhealth vim.lsp
 -- =============================================================================
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = { diagnostics = { globals = { "vim" } } }
-    }
-})
 
 -- Пример: если сервер установлен не через Mason, а через пакетный менеджер ОС
 -- vim.lsp.enable({ "gopls", "rust_analyzer" })
@@ -206,12 +202,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             callback = function() vim.lsp.buf.format({ async = false }) end,
         })
 
-        -- Map 'gd' to jump to definition
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf, desc = 'Go to definition' })
-
-        -- Optional: Map '<C-t>' to jump back to where you were
-        vim.keymap.set('n', '<C-t>', '<C-t>', { buffer = args.buf, desc = 'Jump back' })
-
         -- inlay hints (типы, имена параметров) — включить если нужно
         -- if client:supports_method("textDocument/inlayHint") then
         --   vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
@@ -231,8 +221,8 @@ local sev = vim.diagnostic.severity
 
 vim.diagnostic.config({
     severity_sort    = true,
-    update_in_insert = false,
-    virtual_lines    = false,
+    update_in_insert = false, -- не показывать ошибки в insert mode
+    virtual_lines    = true,  -- ошибки строкой под кодом (поставь true если нравится)
     virtual_text     = {
         prefix = "●",
         spacing = 4,
@@ -307,16 +297,7 @@ end, { expr = true, desc = "Prev completion / S-Tab" })
 
 -- Enter подтверждает выбранный вариант без вставки новой строки
 map("i", "<CR>", function()
-    if vim.fn.pumvisible() == 1 then
-        local info = vim.fn.complete_info({ "selected" })
-        if info.selected ~= -1 then
-            return "<C-y>"     -- реально выбран пункт — подтверждаем
-        else
-            return "<C-e><CR>" -- ничего не выбрано — закрываем меню и сразу переносим строку
-        end
-    else
-        return "<CR>"
-    end
+    return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
 end, { expr = true, desc = "Confirm completion / Enter" })
 
 -- MISC
