@@ -50,7 +50,7 @@ opt.swapfile         = false     -- без swap-файлов
 opt.termguicolors    = true      -- 24-bit цвета
 opt.winborder        = "rounded" -- скруглённые рамки у float-окон (LSP hover и т.д.)
 
-opt.completeopt      = "fuzzy,menu,menuone,noselect,popup"
+opt.completeopt      = "fuzzy,menu,menuone,noselect"
 opt.shortmess:append("c") -- меньше мусора от completion-меню
 opt.complete   = "o"      -- только LSP, без буфера/путей/тегов
 opt.pumheight  = 5
@@ -108,6 +108,10 @@ vim.pack.add({
     gh("christoomey/vim-tmux-navigator"),
 
     gh("nvim-mini/mini.surround"),
+
+    gh("nvim-mini/mini.diff"),
+
+    gh("nvim-mini/mini.completion"),
 })
 
 
@@ -126,6 +130,10 @@ require("vague").setup({
     transparent = true,
 })
 vim.cmd.colorscheme('vague')
+
+vim.lsp.config('*', {
+    capabilities = require('mini.completion').get_lsp_capabilities(),
+})
 
 -- mason — менеджер LSP-серверов
 -- Открыть UI: :Mason
@@ -160,6 +168,20 @@ require("mini.icons").setup()
 
 require("mini.surround").setup()
 
+require('mini.diff').setup()
+
+require('mini.completion').setup({
+    delay = { completion = 100, info = 100, signature = 50 },
+    window = {
+        info      = { height = 20, width = 80, border = 'rounded' },
+        signature = { height = 20, width = 80, border = 'rounded' },
+    },
+    lsp_completion = {
+        source_func = 'omnifunc',
+        auto_setup = false,
+    },
+    fallback_action = '<C-n>',
+})
 -- =============================================================================
 -- LSP
 --
