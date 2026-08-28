@@ -38,6 +38,8 @@ opt.wrap             = false -- не переносить длинные стр�
 opt.scrolloff        = 8     -- запас строк при скролле
 opt.sidescrolloff    = 8
 
+opt.clipboard        = "unnamedplus"
+
 opt.splitright       = true -- вертикальный сплит вправо
 opt.splitbelow       = true -- горизонтальный сплит вниз
 

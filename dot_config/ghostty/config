@@ -3,3 +3,6 @@ theme="Carbonfox"
 font-family="FiraCode Nerd Font Mono"
 cursor-style=bar
 shell-integration-features = no-cursor
+clipboard-paste-protection = false
+clipboard-read = allow
+clipboard-write = allow
