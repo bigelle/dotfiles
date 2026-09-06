@@ -43,16 +43,15 @@ opt.splitbelow       = true -- горизонтальный сплит вниз
 
 opt.laststatus       = 3
 
-opt.undofile         = true      -- персистентный undo между сессиями
+opt.undofile         = true  -- персистентный undo между сессиями
 opt.undodir          = vim.fn.stdpath("data") .. "/undodir"
-opt.swapfile         = false     -- без swap-файлов
+opt.swapfile         = false -- без swap-файлов
 
-opt.termguicolors    = true      -- 24-bit цвета
-opt.winborder        = "rounded" -- скруглённые рамки у float-окон (LSP hover и т.д.)
-
+opt.termguicolors    = true  -- 24-bit цвета
+opt.winborder        = ""    -- скруглённые рамки у float-окон (LSP hover и т.д.)
 opt.completeopt      = "fuzzy,menu,menuone,noselect"
-opt.shortmess:append("c") -- меньше мусора от completion-меню
-opt.complete   = "o"      -- только LSP, без буфера/путей/тегов
+opt.shortmess:append("c")    -- меньше мусора от completion-меню
+opt.complete   = "o"         -- только LSP, без буфера/путей/тегов
 opt.pumheight  = 5
 opt.pumborder  = "rounded"
 
@@ -112,6 +111,11 @@ vim.pack.add({
     gh("nvim-mini/mini.diff"),
 
     gh("nvim-mini/mini.completion"),
+
+    gh("folke/noice.nvim"),
+    gh("MunifTanjim/nui.nvim"),
+
+    gh("smjonas/inc-rename.nvim"),
 })
 
 
@@ -171,16 +175,61 @@ require("mini.surround").setup()
 require('mini.diff').setup()
 
 require('mini.completion').setup({
-    delay = { completion = 100, info = 100, signature = 50 },
     window = {
         info      = { height = 20, width = 80, border = 'rounded' },
         signature = { height = 20, width = 80, border = 'rounded' },
     },
     lsp_completion = {
         source_func = 'omnifunc',
-        auto_setup = false,
+        auto_setup = true,
     },
-    fallback_action = '<C-n>',
+    fallback_action = '<C-x><C-f>',
+})
+
+require("noice").setup({
+    lsp = {
+        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+        override  = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+        },
+        hover     = { enabled = true },
+        signature = { enabled = false },
+        message   = { enabled = false },
+    },
+    -- you can enable a preset for easier configuration
+    presets = {
+        command_palette = false,
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
+    },
+    popupmenu = {
+        enabled = false,
+    },
+    cmdline = {
+        enabled = true,
+        view = "cmdline_popup",
+    },
+    messages = {
+        enabled = true,
+        view = "notify",
+        view_error = "notify",
+        view_warn = "notify",
+    },
+    notify = {
+        enabled = true,
+        view = "notify",
+    },
+    views = {
+        cmdline_popup = {
+            border = { style = "rounded", padding = { 0, 1 } },
+            position = { row = "25%", col = "50%" },
+        },
+        hover = {
+            border = { style = "rounded", padding = { 0, 1 } },
+        },
+    },
 })
 -- =============================================================================
 -- LSP
@@ -215,11 +264,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
 
-        -- встроенный автокомплит от LSP (заменяет nvim-cmp)
-        if client:supports_method("textDocument/completion") then
-            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-        end
-
         -- LSP hover поверх man.lua (иначе K открывает сплит с man-страницей)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = args.buf, desc = "LSP hover" })
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = args.buf, desc = "LSP format" })
@@ -240,10 +284,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- end
     end,
 })
-
--- встроенный автокомплит (работает независимо от LSP — буфер, пути и т.д.)
-vim.o.autocomplete = true
-
 
 -- =============================================================================
 -- DIAGNOSTICS
