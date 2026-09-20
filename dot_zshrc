@@ -105,7 +105,6 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH=/home/heroofsocks/.local/bin:$PATH
 export EDITOR=neovim
-eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 eval $(thefuck --alias)
 fpath=(~/.zsh/completion $fpath)
