@@ -22,7 +22,6 @@
             name = "user-environment";
             paths = with pkgs; [
               # Компиляторы и базовый дев-инструментарий
-              gcc
               rustup
 
               # Редакторы и оболочки
