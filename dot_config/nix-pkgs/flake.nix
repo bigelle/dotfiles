@@ -1,44 +1,67 @@
 {
-  description = "Мой декларативный набор системных утилит и инструментов";
+  description = "Универсальный декларативный конфиг пользователя (Home Manager + Nix)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, home-manager }:
     let
-      # Автоматическое определение архитектуры (x86_64-linux, aarch64-darwin и т.д.)
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      system = builtins.currentSystem or "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+
+      username = builtins.getEnv "USER";
+      homeDir = builtins.getEnv "HOME";
     in
     {
-      # Профиль профилей/пакетов для установки через `nix profile install`
-      packages = forAllSystems (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          default = pkgs.buildEnv {
-            name = "user-environment";
-            paths = with pkgs; [
-              # Компиляторы и базовый дев-инструментарий
-              rustup
-              go
-              xmake
+      homeConfigurations = {
+        default = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-              # Редакторы и оболочки
-              neovim
-              zsh
-              oh-my-zsh
-              tmux
-              starship
+          modules = [
+            ({ config, pkgs, ... }: {
+              news.display = "silent";
+              home.username = username;
+              home.homeDirectory = homeDir;
+              home.stateVersion = "24.05";
 
-              # Утилиты буфера обмена и системы
-              wl-clipboard
-              mangohud
-            ];
-          };
-        }
-      );
+              nixpkgs.config.allowUnfree = true;
+
+              home.packages = with pkgs; [
+                neovim
+                tmux
+                wl-clipboard
+                bat
+                direnv
+              ];
+
+              programs.zsh = {
+                enable = true;
+                enableCompletion = true;
+
+                oh-my-zsh = {
+                  enable = true;
+                  plugins = [ "git" ];
+                  theme = ""; 
+                };
+
+                initExtra = ''
+                  eval "$(direnv hook zsh)"
+                '';
+              };
+
+              programs.starship = {
+                enable = true;
+                enableZshIntegration = true;
+              };
+            })
+          ];
+        };
+      };
     };
 }

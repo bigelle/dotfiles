@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# 1. Подгружаем Nix в PATH (как для однопользовательской, так и для многопользовательской установки)
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+elif [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
+FLAKE_DIR="$HOME/.config/nix-pkgs"
+
+if [ ! -d "$FLAKE_DIR" ]; then
+  echo "Предупреждение: Директория $FLAKE_DIR с flake.nix не найдена."
+  exit 0
+fi
+
+# 2. Отслеживаем изменения во flake.nix (для chezmoi run_onchange_)
+# chezmoi hash: {{ include "dot_config/nix-pkgs/flake.nix" | sha256sum }}
+
+echo "==> Синхронизация Home Manager из $FLAKE_DIR..."
+
+# 3. Применяем конфигурацию Home Manager без необходимости заранее устанавливать бинарник home-manager
+nix run --extra-experimental-features "nix-command flakes" \
+  github:nix-community/home-manager -- switch --flake "$FLAKE_DIR#default" --impure
