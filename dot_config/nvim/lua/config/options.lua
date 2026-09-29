@@ -2,39 +2,37 @@
 -- OPTIONS
 -- =============================================================================
 
-local o           = vim.o
+local o          = vim.o
 
 -- ── UI ───────────────────────────────────────────────────────────────────────
-o.number          = true
-o.relativenumber  = true
-o.signcolumn      = "yes" -- всегда колонка знаков (без прыжков текста)
-o.cursorline      = true
-o.termguicolors   = true
-o.laststatus      = 3         -- одна статусная строка на все окна
-o.winborder       = "rounded" -- рамки ВСЕХ float-окон (hover, diagnostics, ui.select)
-o.wrap            = false
-o.scrolloff       = 8
-o.sidescrolloff   = 8
-o.smoothscroll    = true -- плавный скролл длинных wrapped-строк
-o.splitright      = true
-o.splitbelow      = true
-o.splitkeep       = "screen" -- текст не прыгает при открытии сплита
-o.mouse           = "a"
-o.confirm         = true     -- вместо E37 спрашивает «сохранить?»
-o.inccommand      = "split"  -- живой предпросмотр :s///
-o.list            = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+o.number         = true
+o.relativenumber = true
+o.signcolumn     = "yes" -- всегда колонка знаков (без прыжков текста)
+o.cursorline     = true
+o.termguicolors  = true
+o.laststatus     = 3         -- одна статусная строка на все окна
+o.winborder      = "rounded" -- рамки ВСЕХ float-окон (hover, diagnostics, ui.select)
+o.wrap           = false
+o.scrolloff      = 8
+o.sidescrolloff  = 8
+o.smoothscroll   = true -- плавный скролл длинных wrapped-строк
+o.splitright     = true
+o.splitbelow     = true
+o.splitkeep      = "screen" -- текст не прыгает при открытии сплита
+o.mouse          = "a"
+o.confirm        = true     -- вместо E37 спрашивает «сохранить?»
+o.inccommand     = "split"  -- живой предпросмотр :s///
 
 -- ── Отступы ──────────────────────────────────────────────────────────────────
-o.tabstop         = 4
-o.shiftwidth      = 4
-o.expandtab       = true
-o.smartindent     = true
-o.breakindent     = true
+o.tabstop        = 4
+o.shiftwidth     = 4
+o.expandtab      = true
+o.smartindent    = true
+o.breakindent    = true
 
 -- ── Поиск ────────────────────────────────────────────────────────────────────
-o.ignorecase      = true
-o.smartcase       = true
+o.ignorecase     = true
+o.smartcase      = true
 
 if vim.fn.executable("rg") == 1 then
     o.grepprg    = "rg --vimgrep --smart-case"

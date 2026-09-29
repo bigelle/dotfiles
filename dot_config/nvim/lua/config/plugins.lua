@@ -16,6 +16,7 @@ vim.pack.add({
 
     -- Установка LSP-серверов, форматтеров и линтеров: :Mason
     gh("mason-org/mason.nvim"),
+    gh("mason-org/mason-lspconfig.nvim"),
 
     -- Парсеры и queries для treesitter (ветка main — обязательно)
     { src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
@@ -52,6 +53,9 @@ vim.cmd.colorscheme("vague")
 
 -- mason: только установщик бинарников. Включение серверов — в config/lsp.lua
 require("mason").setup()
+require("mason-lspconfig").setup {
+    automatic_enable = false
+}
 
 -- treesitter: setup() ничего не включает, он только задаёт install_dir.
 -- Установить парсер:   :TSInstall go rust

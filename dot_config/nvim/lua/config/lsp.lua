@@ -12,7 +12,7 @@
 
 vim.lsp.enable({
     "lua_ls",
-    -- "gopls",
+    "gopls",
     -- "rust_analyzer",
     -- "ts_ls",
     -- "pyright",
