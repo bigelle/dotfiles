@@ -48,17 +48,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
                     { bufnr = buf })
             end, { buffer = buf, desc = "LSP: inlay hints вкл/выкл" })
         end
-
-        -- подсветка вхождений слова под курсором
-        if client:supports_method("textDocument/documentHighlight") then
-            local g = vim.api.nvim_create_augroup("lsp_highlight_" .. buf, { clear = true })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-                group = g, buffer = buf, callback = vim.lsp.buf.document_highlight,
-            })
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-                group = g, buffer = buf, callback = vim.lsp.buf.clear_references,
-            })
-        end
     end,
 })
 
