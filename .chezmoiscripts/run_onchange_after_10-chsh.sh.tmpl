@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TARGET_SHELL=$(which zsh)
+CURRENT_USER=$(whoami)
+
+CURRENT_DB_SHELL=$(getent passwd "$CURRENT_USER" | cut -d: -f7)
+
+if [ "$CURRENT_DB_SHELL" == "$TARGET_SHELL" ] ; then
+    chsh -s "$TARGET_SHELL"
+fi
