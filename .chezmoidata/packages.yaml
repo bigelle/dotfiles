@@ -1,0 +1,12 @@
+packages:
+  common:
+    pacman: []
+    aur: []
+  gpu:
+    nvidia: []
+    intel: []
+    amd: []
+  cpu:
+    intel: []
+    amd: []
+  laptop: []
