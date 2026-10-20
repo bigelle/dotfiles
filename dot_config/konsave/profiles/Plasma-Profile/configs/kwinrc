@@ -1,0 +1,16 @@
+[Desktops]
+Id_1=007f65e2-c87f-46e1-a22e-2e1353687710
+Number=1
+Rows=1
+
+[Tiling][007f65e2-c87f-46e1-a22e-2e1353687710][5ff0a753-8921-47e0-b5e9-c00107138be0]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Xwayland]
+Scale=1
+
+[org.kde.kdecoration2]
+NoPlugin=false
+library=org.kde.breeze
+theme=Breeze
