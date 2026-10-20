@@ -1,12 +1,29 @@
 [Desktops]
 Id_1=007f65e2-c87f-46e1-a22e-2e1353687710
-Number=1
+Id_2=ee6216e6-522a-4b5b-b021-ecc127905331
+Id_3=cace74eb-4521-4ee2-9978-642dab1919d7
+Name_1=main
+Name_2=browser
+Name_3=idle
+Number=3
 Rows=1
 
 [Effect-overview]
 BorderActivate=9
 
+[Tiling][007f65e2-c87f-46e1-a22e-2e1353687710][]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][007f65e2-c87f-46e1-a22e-2e1353687710][5ff0a753-8921-47e0-b5e9-c00107138be0]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][cace74eb-4521-4ee2-9978-642dab1919d7][5ff0a753-8921-47e0-b5e9-c00107138be0]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][ee6216e6-522a-4b5b-b021-ecc127905331][5ff0a753-8921-47e0-b5e9-c00107138be0]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 

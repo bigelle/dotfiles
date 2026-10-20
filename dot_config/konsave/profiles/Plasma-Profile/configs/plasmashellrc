@@ -45,7 +45,7 @@ panelVisibility=2
 shell=org.kde.plasma.desktop
 
 [PlasmaViews][Panel 79][Defaults]
-thickness=61
+thickness=70
 
 [PlasmaViews][Panel 81]
 floating=1
