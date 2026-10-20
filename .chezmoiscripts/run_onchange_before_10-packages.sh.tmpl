@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{- $pacman := concat .packages.common.pacman }}
+{{- if .laptop }}
+{{-   $pacman = concat $pacman .packages.laptop }}
+{{- end }}
+{{- $aur := .packages.common.aur }}
+
+sudo pacman -Syu --noconfirm
+
+{{ if $pacman -}}
+sudo pacman -S --needed --noconfirm {{ $pacman | uniq | join " " }}
+{{ end -}}
+
+{{ if $aur -}}
+if ! command -v paru >/dev/null; then
+    if pacman -Si paru >/dev/null 2>&1; then
+    	# CachyOS
+        sudo pacman -S --needed --noconfirm paru
+    else
+    	# any Arch
+        sudo pacman -S --needed --noconfirm base-devel git
+        tmp=$(mktemp -d)
+        git clone https://aur.archlinux.org/paru-bin.git "$tmp/paru-bin"
+        (cd "$tmp/paru-bin" && makepkg -si --noconfirm)
+        rm -rf "$tmp"
+    fi
+fi
+
+paru -S --needed --noconfirm {{ $aur | uniq | join " " }}
+{{ end -}}

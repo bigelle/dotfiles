@@ -1,4 +1,2 @@
 [data]
-  gpu    = {{ promptChoiceOnce . "gpu" "GPU" (list "nvidia" "intel" "amd") | quote }}
-  cpu    = {{ promptChoiceOnce . "cpu" "CPU" (list "intel" "amd") | quote }}
   laptop = {{ promptBoolOnce . "laptop" "Это ноутбук" }}

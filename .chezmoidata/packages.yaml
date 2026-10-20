@@ -1,12 +1,5 @@
 packages:
   common:
-    pacman: []
+    pacman: [neovim, zsh, wezterm]
     aur: []
-  gpu:
-    nvidia: []
-    intel: []
-    amd: []
-  cpu:
-    intel: []
-    amd: []
   laptop: []
