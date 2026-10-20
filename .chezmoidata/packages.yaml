@@ -1,5 +1,5 @@
 packages:
   common:
-    pacman: [neovim, zsh, wezterm]
+    pacman: [neovim, zsh, wezterm, python-pipx]
     aur: []
   laptop: []
