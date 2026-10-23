@@ -1,0 +1,9 @@
+#!usr/bin/env bash
+
+set -euo pipefail
+
+# install pywal
+pipx install pywal
+
+# apply it
+wal -i {{ .chezmoi.config.sourceDir }}/assets/wallpapers/wallpaper.png -o ~/.config/wal/kde-apply.sh -a 90
