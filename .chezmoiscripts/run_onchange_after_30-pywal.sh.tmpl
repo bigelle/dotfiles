@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # install pywal
-pipx install pywal
+pipx install pywal16
 
 # apply it
 wal -i {{ .chezmoi.config.destDir }}/assets/wallpapers/wallpaper.png -o ~/.config/wal/kde-apply.sh -a 90
