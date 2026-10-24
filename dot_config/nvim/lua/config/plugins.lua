@@ -34,7 +34,7 @@ vim.pack.add({
     gh("nvim-mini/mini.icons"),           -- иконки
     gh("nvim-mini/mini.surround"),        -- sa/sd/sr — кавычки, скобки, теги
     gh("nvim-mini/mini.diff"),            -- git-знаки в signcolumn + hunk-операции
-    gh("vague-theme/vague.nvim"),         -- colorscheme
+    gh("uZer/pywal16.nvim"),              -- colorscheme
     gh("christoomey/vim-tmux-navigator"), -- <C-hjkl> между окнами nvim и панелями tmux
 })
 
@@ -48,8 +48,8 @@ vim.cmd("packadd nvim.undotree") -- :Undotree
 -- =============================================================================
 
 -- colorscheme первым, чтобы остальное рендерилось поверх
-require("vague").setup({ transparent = true })
-vim.cmd.colorscheme("vague")
+local pywal16 = require('pywal16')
+pywal16.setup()
 
 -- mason: только установщик бинарников. Включение серверов — в config/lsp.lua
 require("mason").setup()
