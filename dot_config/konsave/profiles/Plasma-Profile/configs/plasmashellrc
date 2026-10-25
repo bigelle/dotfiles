@@ -1,54 +1,12 @@
-[PlasmaTransientsConfig]
-popupHeight=400
-popupWidth=560
-
 [PlasmaViews][Panel 2]
 floating=1
 
 [PlasmaViews][Panel 2][Defaults]
 thickness=44
 
-[PlasmaViews][Panel 44]
-floating=0
-panelOpacity=1
-shell=org.kde.plasma.desktop
-
-[PlasmaViews][Panel 44][Defaults]
-thickness=82
-
-[PlasmaViews][Panel 67]
-floating=1
-floatingApplets=1
-panelLengthMode=1
-panelOpacity=0
-panelVisibility=2
-shell=org.kde.plasma.desktop
-
-[PlasmaViews][Panel 67][Defaults]
-thickness=64
-
-[PlasmaViews][Panel 72]
-alignment=2
-floating=1
-floatingApplets=1
-panelLengthMode=1
-panelVisibility=2
-shell=org.kde.plasma.desktop
-
-[PlasmaViews][Panel 72][Defaults]
-thickness=64
-
-[PlasmaViews][Panel 79]
-floating=1
-panelLengthMode=1
-panelVisibility=2
-shell=org.kde.plasma.desktop
-
-[PlasmaViews][Panel 79][Defaults]
-thickness=70
-
 [PlasmaViews][Panel 81]
-floating=1
+floating=0
+floatingApplets=1
 panelLengthMode=1
 shell=org.kde.plasma.desktop
 

@@ -33,6 +33,10 @@
       "rev": "59ce0acf79e1d930756ef3a7cb4c2369560cf548",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
+    "neopywal.nvim": {
+      "rev": "95425eea6411eebc17c2fcdc46d1c45e57d99205",
+      "src": "https://github.com/RedsXDD/neopywal.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "77b7432d4770d23b277d37923e5a08a442d8bb07",
       "src": "https://github.com/neovim/nvim-lspconfig"
