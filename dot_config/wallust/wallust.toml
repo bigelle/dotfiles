@@ -15,7 +15,7 @@ backend = "full"
 
 # What color space to use to produce and select the most prominent colors:
 # lab - labmixed - lch - lchmixed - salience
-color_space = "lch"
+color_space = "lab"
 
 # Use the most prominent colors in a way that makes sense, a scheme color palette:
 # dark - dark16 - darkcomp - darkcomp16
@@ -25,12 +25,12 @@ color_space = "lch"
 # softlight - softlight16 - softlightcomp - softlightcomp16
 # saliencedark - saliencedarkbalanced - saliencedarkdistributed - saliencedarklow (each has the 16 variations)
 # salienceligh - saliencelightbalanced - saliencelightdistributed - saliencelightlow (each has the 16 variations)
-palette = "dark16"
+palette = "dark"
 
 # Ensures a "readable contrast" (OPTIONAL, disabled by default)
 # Should only be enabled when you notice an unreadable contrast frequently happening
 # with your images. The reference color for the contrast is the background color.
-check_contrast = true
+#check_contrast = true
 
 color_order = "darkest"
 
@@ -56,7 +56,10 @@ contrast = 4.5
 # zathura = { template = 'zathura', target = '~/.config/zathura/zathurarc' }
 neopywal.template = 'colors_neopywal.vim'
 neopywal.target = '~/.cache/wallust/colors_neopywal.vim'
+kde.template = "kde.colors.j2"
+kde.target = "~/.local/share/color-schemes/WallustGenerated.colors"
 
 [hooks]
 # Run commands when wallust is invoked. Useful to avoid scripting.
 #wallpaper = """swww img "$(find ~/Media/Pictures/Wallpapers -iregex '.*.\\(jpg\\|jpeg\\|png\\|gif\\)' -type f | shuf -n 1)" """
+
