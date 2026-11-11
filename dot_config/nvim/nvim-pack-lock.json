@@ -13,6 +13,10 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "matugen.nvim": {
+      "rev": "27b2593c8bfcbd329da43f78d0d82fb4d1a5fea2",
+      "src": "https://github.com/Senal-D-A-Gunaratna/matugen.nvim"
+    },
     "mini.diff": {
       "rev": "47ab8cf21c62cfd952008f2b9e79417c98173ec1",
       "src": "https://github.com/nvim-mini/mini.diff"

@@ -1,0 +1,30 @@
+[config]
+
+[templates.kvantum_config]
+input_path  = '~/.config/matugen/templates/kvantum.kvconfig'
+output_path = '~/.config/Kvantum/WinSurMatugen/WinSurMatugen.kvconfig'
+
+[templates.kvantum_svg]
+input_path  = '~/.config/matugen/templates/kvantum.svg'
+output_path = '~/.config/Kvantum/WinSurMatugen/WinSurMatugen.svg'
+post_hook = 'kvantummanager --set WinSur-dark && kvantummanager --set WinSurMatugen'
+
+[templates.kde]
+input_path  = '~/.config/matugen/templates/kde.colors'
+output_path = '~/.local/share/color-schemes/Matugen.colors'
+post_hook   = 'plasma-apply-colorscheme BreezeDark && plasma-apply-colorscheme Matugen'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/themes/Matugen.conf'
+post_hook = "kitty +kitten themes --reload-in=all Matugen"
+
+[templates.neovim]
+input_path = "~/.config/matugen/templates/nvim-colors.json"
+output_path = "~/.cache/matugen/nvim-colors.json"
+post_hook = "pkill -SIGUSR1 nvim"
+
+[templates.zellij]
+input_path = '~/.config/matugen/templates/zellij-theme.kdl.tera'
+output_path = '~/.config/zellij/themes/matugen.kdl'
+post_hook = 'touch ~/.config/zellij/config.kdl'

@@ -1,2 +1,10 @@
 [General]
-Order=steam
+Order=c4d33346-bcc0-4110-8a60-0119eee2994b
+
+[c4d33346-bcc0-4110-8a60-0119eee2994b]
+Description=OSD low position
+ignoregeometry=true
+ignoregeometryrule=2
+position=760,300
+positionrule=3
+types=65536

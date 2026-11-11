@@ -29,13 +29,13 @@ vim.pack.add({
     -- Быстрые «закладки» на файлы
     { src = gh("ThePrimeagen/harpoon"),            version = "harpoon2" },
 
-    gh("folke/todo-comments.nvim"),       -- подсветка TODO/FIXME/HACK
-    gh("folke/which-key.nvim"),           -- подсказка маппингов
-    gh("nvim-mini/mini.icons"),           -- иконки
-    gh("nvim-mini/mini.surround"),        -- sa/sd/sr — кавычки, скобки, теги
-    gh("nvim-mini/mini.diff"),            -- git-знаки в signcolumn + hunk-операции
-    gh("RedsXDD/neopywal.nvim"),          -- colorscheme
-    gh("christoomey/vim-tmux-navigator"), -- <C-hjkl> между окнами nvim и панелями tmux
+    gh("folke/todo-comments.nvim"),         -- подсветка TODO/FIXME/HACK
+    gh("folke/which-key.nvim"),             -- подсказка маппингов
+    gh("nvim-mini/mini.icons"),             -- иконки
+    gh("nvim-mini/mini.surround"),          -- sa/sd/sr — кавычки, скобки, теги
+    gh("nvim-mini/mini.diff"),              -- git-знаки в signcolumn + hunk-операции
+    gh("Senal-D-A-Gunaratna/matugen.nvim"), -- colorscheme
+    gh("christoomey/vim-tmux-navigator"),   -- <C-hjkl> между окнами nvim и панелями tmux
 })
 
 -- Встроенные opt-плагины 0.12 (не грузятся сами)
@@ -48,11 +48,9 @@ vim.cmd("packadd nvim.undotree") -- :Undotree
 -- =============================================================================
 
 -- colorscheme первым, чтобы остальное рендерилось поверх
-local neopywal = require("neopywal")
-require("neopywal").setup({
-    use_palette = "wallust"
+require("matugen").setup({
+    palette_path = "~/.cache/matugen/nvim-colors.json",
 })
-vim.cmd.colorscheme("neopywal")
 
 -- mason: только установщик бинарников. Включение серверов — в config/lsp.lua
 require("mason").setup()

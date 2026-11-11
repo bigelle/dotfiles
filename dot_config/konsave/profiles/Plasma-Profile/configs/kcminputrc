@@ -1,2 +1,5 @@
+[Keyboard]
+RepeatDelay=350
+
 [Mouse]
-cursorTheme=capitaine-cursors
+cursorTheme=WinSur-dark-cursors
