@@ -23,7 +23,11 @@
    "telemetry": {
       "system_info": false
    },
+   "favorites": [],
    "providers": {
+      "ai": {
+         "enabled": false
+      },
       "browser-extension": {
          "enabled": false
       },
@@ -42,6 +46,9 @@
          "enabled": false
       },
       "developer": {
+         "enabled": false
+      },
+      "dictation": {
          "enabled": false
       },
       "files": {
