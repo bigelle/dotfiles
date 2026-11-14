@@ -1,5 +1,5 @@
 packages:
   common:
     pacman: [neovim, zsh, wezterm, python-pipx, telegram-desktop, fooyin, go, zellij]
-    aur: [plasma6-applets-panel-colorizer, vicinae-bin, krema]
+    aur: [plasma6-applets-panel-colorizer, vicinae-bin, krema, whitesur-icon-theme, plasma6-applets-kara]
   laptop: []
